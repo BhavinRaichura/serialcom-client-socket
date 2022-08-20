@@ -66,6 +66,7 @@ def get_arduino_data(request_arduino):
         fatch data from arduino
     '''
 
+
     data_comming = serial_print_data(ser_address)
 
     while data_comming:
