@@ -54,6 +54,7 @@ def connect():
 def get_arduino_data(request_arduino):
     print(request_arduino)
     ser_address = ""
+
     '''
     get serial ports
     chech in every 5 second serial is available or not
