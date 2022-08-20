@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>clint side html</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            var arduino =io('http://localhost:5000/arduino');
+
+            arduino.on('connect',function(){
+                console.log('connected to arduino...!')
+                arduino.emit('get_arduino_data','Please send data')
+            });
+
+            arduino.on('put_arduino_data',function(arduino_data){
+                $('#heart-rate').html("heart-rate: " + arduino_data['Heart rate']);
+                $('#humidity').html("humidity: " + arduino_data['Humidity']);
+                $('#temp').html('temperature: ' + arduino_data['Temperature']);
+            });
+
+        });
+    </script>
+
+    <div>
+        <ul>
+            <li id="heart-rate"></li>
+            <li id="humidity"></li>
+            <li id="temp"></li>
+        </ul>
+
+    </div>
+
+  </body>
+</html>
